@@ -30,7 +30,17 @@ USE_XORG=	xcb
 USES=		pkgconfig iconv gmake perl5 tar:bzip2
 USE_PERL5=	run
 LDFLAGS+=	-L${LOCALBASE}/lib ${ICONV_LIB}
+OPTIONS_DEFINE= GAPS
 MAKE_JOBS_UNSAFE=	yes
+
+GAPS_DESC =	Support for gaps in between tiles and other features
+
+.include <bsd.port.options.mk>
+
+.if ${PORT_OPTIONS:MGAPS}
+pre-patch:
+	${PATCH}  < ${PATCHDIR}/extra-patch-gaps
+.endif  # WITH_GAPS
 
 post-patch:
 	@${REINPLACE_CMD} -e 's|/etc|${PREFIX}/etc|g' ${WRKSRC}/src/config.c

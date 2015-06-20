@@ -39,7 +39,7 @@ GAPS_DESC =	Support for gaps in between tiles and other features
 
 .if ${PORT_OPTIONS:MGAPS}
 pre-patch:
-	${PATCH}  < ${PATCHDIR}/extra-patch-gaps
+	${PATCH} ${PATCH_ARGS} < ${PATCHDIR}/extra-patch-gaps
 .endif  # WITH_GAPS
 
 post-patch:
